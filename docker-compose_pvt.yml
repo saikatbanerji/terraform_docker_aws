@@ -1,0 +1,22 @@
+# The docker-compose file for using node and mongo images and creating a container in the ec2 within private subnet.
+version: "3"
+services:
+  app:
+    container_name: node :latest
+    restart: always
+    build: .
+    ports:
+      - "1881:1881"
+	  - "27017:27017"
+    links:
+      - mongo
+  mongo:
+    container_name: mongo
+    image: mongo
+    volumes:
+      - ./data:/data/db
+    ports:
+      - "27017:27017"
+      
+      
+      
